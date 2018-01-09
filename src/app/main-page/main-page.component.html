@@ -93,6 +93,28 @@
           <img style="width: 100%" src="assets/r34.png">
         </div>
         <i style="font-size: 23px;">Score: 432433</i>
+        <table style="margin-top: 3%;font-size: 23px" class="classes" align="center">
+          <tr>
+            <td>{{medPoints}}</td>
+            <td>l</td>
+            <td><canvas #med style="height: 10%;width: 100%"></canvas></td>
+          </tr>
+          <tr>
+            <td>{{sniperPoints}}</td>
+            <td>Deaths</td>
+            <td><canvas #sniper style="height: 10%;width: 100%"></canvas></td>
+          </tr>
+          <tr>
+            <td>{{assaultPoints}}</td>
+            <td>Deaths</td>
+            <td><canvas #assault style="height: 10%;width: 100%"></canvas></td>
+          </tr>
+          <tr>
+            <td>{{engPoints}}</td>
+            <td>Deaths</td>
+            <td><canvas #eng style="height: 10%;width: 100%"></canvas></td>
+          </tr>
+        </table>
       </div>
       <div class="halfStats">
         <i style="font-size: 23px;">Top weapon: AEK - 971, Kills: 687</i>
@@ -100,28 +122,28 @@
         <hr color="#3b3b3b">
         <div class="stats" style="font-size: 23px" align="center">
           <div>
-            W/L ratio
+            W/L ratio: {{wlRatio}}
             <table class="ratio" align="center">
               <tr>
                 <td>Wins</td>
                 <td>Loses</td>
               </tr>
               <tr>
-                <td>685</td>
-                <td>734</td>
+                <td style="color: green">{{wins}}</td>
+                <td style="color: red">{{loses}}</td>
               </tr>
             </table>
           </div>
           <div>
-            K/D ratio
+            K/D ratio: {{kdRatio}}
             <table class="ratio" align="center">
               <tr>
                 <td>Kills</td>
                 <td>Deaths</td>
               </tr>
               <tr>
-                <td>3025</td>
-                <td>5364</td>
+                <td style="color: green">{{kills}}</td>
+                <td style="color: red">{{deaths}}</td>
               </tr>
             </table>
           </div>

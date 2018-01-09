@@ -131,3 +131,11 @@ button:active { background: rgba(130,130,130,1); }
   display: grid;
   grid-template-columns: 69% 29%;
 }
+
+.classes {
+  padding: 10%;
+  width: 100%;
+}
+.classes td {
+  width: 20%;
+}
