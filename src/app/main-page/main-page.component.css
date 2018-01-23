@@ -32,7 +32,7 @@
   height: 100%;
 
   cursor: pointer;
-  background: url("assets/search.png") 50% no-repeat;
+  background: url("/assets/search.png") 50% no-repeat;
   opacity: 0.5;
 }
 .search .submit:hover {
@@ -98,7 +98,7 @@ button:active { background: rgba(130,130,130,1); }
 
 .buttons {
   display: grid;
-  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-columns: 25% 25% 25% 25%;
 }
 
 .stats {

@@ -1,4 +1,4 @@
-<select >
-  <option>English</option>
-  <option selected>Русский</option>
+<select (change)="changeLanguage($event)">
+  <option #en >English</option>
+  <option #ru >Русский</option>
 </select>

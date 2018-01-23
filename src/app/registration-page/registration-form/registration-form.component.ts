@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Person} from '../../classes';
 import {MainService} from '../../main.service';
+import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
@@ -9,13 +10,10 @@ import {MainService} from '../../main.service';
 export class RegistrationFormComponent implements OnInit {
   person = new Person();
   error_message;
-  constructor(private service: MainService) {}
+  constructor(private service: MainService, private translate: TranslateService) {}
 
   ngOnInit() {
-    this.person.Name = '';
     this.person.Nickname = '';
-    this.person.Surname = '';
-    this.person.email = '';
     this.person.password = '';
   }
   add_person() {

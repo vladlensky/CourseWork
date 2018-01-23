@@ -8,6 +8,7 @@ import {AuthGuard} from './app.guard';
 import {MainService} from './main.service';
 import {TopComponent} from './top/top.component';
 import {MainPageComponent} from './main-page/main-page.component';
+import {WeaponsComponent} from "./weapons/weapons.component";
 
 export const router: Routes = [
   {path: '', redirectTo: 'battlefield', pathMatch: 'full'},
@@ -17,7 +18,7 @@ export const router: Routes = [
   {path: 'signIn', component: SignInFormComponent},
   {path: 'top', canActivate: [AuthGuard], component: TopComponent},
   {path: 'stats', canActivate: [AuthGuard], component: MainPageComponent},
-  // {path: 'settings', canActivate: [AuthGuard], component: NetworkComponent},
+  {path: 'weapons', canActivate: [AuthGuard], component: WeaponsComponent},
   // {path: 'friends/:Nickname', canActivate: [AuthGuard], component: NetworkComponent},
   // {path: 'messages', canActivate: [AuthGuard], component: NetworkComponent},
   // {path: 'messages/:Nickname', canActivate: [AuthGuard], component: NetworkComponent},

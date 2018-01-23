@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Person} from '../../classes';
 import {MainService} from '../../main.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sign-in-form',
@@ -11,16 +12,14 @@ export class SignInFormComponent {
   error_message = '';
   person = new Person();
 
-  constructor(private service: MainService) { }
+  constructor(private service: MainService, private translate: TranslateService) { }
   checkPerson () {
-    // event.preventDefault();
-    // if (this.service.checkNickname(this.person)){
-    //   this.error_message = 'Incorrect nickname';
-    //   return false;
-    // }
-    // if(!this.service.checkPassword(this.person)) {
-    //   this.error_message = 'Incorrect password';
-    // }
+    this.service.get('http://localhost:8080/getAllUsers').subscribe(value => {
+        console.log(value);
+      },
+      error => {
+        // error - объект ошибки
+      });
   }
 
 }

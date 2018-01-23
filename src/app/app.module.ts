@@ -1,7 +1,7 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
 import { SignInFormComponent } from './registration-page/sign-in-form/sign-in-form.component';
@@ -14,6 +14,16 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { WeaponsComponent } from './weapons/weapons.component';
 import { UpgradesComponent } from './upgrades/upgrades.component';
 import { LanguageComponent } from './language/language.component';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { CookieService } from 'ngx-cookie-service';
+import { GadgetsComponent } from './gadgets/gadgets.component';
+import { SpecializationsComponent } from './specializations/specializations.component';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -25,15 +35,27 @@ import { LanguageComponent } from './language/language.component';
     MainPageComponent,
     WeaponsComponent,
     UpgradesComponent,
-    LanguageComponent
+    LanguageComponent,
+    GadgetsComponent,
+    SpecializationsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    routes
+    HttpClientModule,
+    routes,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
-  providers: [AuthGuard, MainService],
+  providers: [AuthGuard, MainService, CookieService,
+    { provide: 'translate_i18n_ru', useValue: require('../assets/i18n/ru.json'), multi: true },
+    { provide: 'translate_i18n_en', useValue: require('../assets/i18n/en.json'), multi: true }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

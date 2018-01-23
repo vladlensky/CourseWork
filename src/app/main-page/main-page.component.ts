@@ -1,4 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-main-page',
@@ -27,7 +28,7 @@ export class MainPageComponent implements OnInit {
   kills = 4658;
   wlRatio = Math.round(this.wins / this.loses * 100) / 100;
   kdRatio = Math.round(this.kills / this.deaths * 100) / 100;
-  constructor() { }
+  constructor(private translate: TranslateService) { }
 
   ngOnInit() {
     let context = this.canvas.nativeElement.getContext('2d');

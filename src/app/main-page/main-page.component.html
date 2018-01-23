@@ -1,7 +1,7 @@
 <div class="main">
   <div class="users" style="width: 95%">
     <form action="" method="post" class="search">
-      <input type="search" name="" placeholder="search" class="input" />
+      <input type="search" name="" placeholder="{{'search' | translate}}" class="input" />
       <input type="submit" name="" value="" class="submit" />
     </form>
     <div id="table">
@@ -76,57 +76,60 @@
     </div>
   </div>
   <div class="info">
-    <i style="font-size: 30px;">Dorou</i>
+    <i style="font-size: 30px;">Dorou
+      <input style="margin-left: 5%" type="checkbox" id="privacy">
+      <label style="font-size: 20px;" for="privacy">{{'Private' | translate}}</label>
+      <button style="width: 15%;margin-left: 5%">{{'Return to stats' | translate}}</button>
+    </i>
     <hr>
     <div class="buttons">
-      <button >Top 10 players</button>
-      <button >Weapons</button>
-      <button >Camos</button>
-      <button >Gadgets</button>
-      <button >Specializations</button>
+      <button >{{'Top' | translate}}</button>
+      <button >{{'Weapons' | translate}}</button>
+      <button >{{'Gadgets' | translate}}</button>
+      <button >{{'Specializations' | translate}}</button>
     </div>
     <div class="stats">
       <div class="halfStats">
-        <i style="font-size: 23px;">Statistics</i>
+        <i style="font-size: 23px;">{{'Statistics' | translate}}</i>
         <div class="circles">
           <canvas #canvas style="width: 100%"></canvas>
           <img style="width: 100%" src="assets/r34.png">
         </div>
-        <i style="font-size: 23px;">Score: 432433</i>
-        <table style="margin-top: 3%;font-size: 23px" class="classes" align="center">
+        <i style="font-size: 23px;">{{'Score' | translate}}: 432433</i>
+        <table style="margin-top: -8%;font-size: 23px;" class="classes" align="center">
           <tr>
             <td>{{medPoints}}</td>
-            <td>l</td>
+            <td><img src="assets/support.png" style="width: 40%"/></td>
             <td><canvas #med style="height: 10%;width: 100%"></canvas></td>
           </tr>
           <tr>
             <td>{{sniperPoints}}</td>
-            <td>Deaths</td>
+            <td><img src="assets/recon.png" style="width: 40%"/></td>
             <td><canvas #sniper style="height: 10%;width: 100%"></canvas></td>
           </tr>
           <tr>
             <td>{{assaultPoints}}</td>
-            <td>Deaths</td>
+            <td><img src="assets/assault.png" style="width: 40%"/></td>
             <td><canvas #assault style="height: 10%;width: 100%"></canvas></td>
           </tr>
           <tr>
             <td>{{engPoints}}</td>
-            <td>Deaths</td>
+            <td><img src="assets/engineer.png" style="width: 40%"/></td>
             <td><canvas #eng style="height: 10%;width: 100%"></canvas></td>
           </tr>
         </table>
       </div>
       <div class="halfStats">
-        <i style="font-size: 23px;">Top weapon: AEK - 971, Kills: 687</i>
+        <i style="font-size: 23px;">{{'Top weapon' | translate}} : AEK - 971, Kills: 687</i>
         <img src="assets/aek971.png" style="width: 90%"/>
         <hr color="#3b3b3b">
-        <div class="stats" style="font-size: 23px" align="center">
+        <div class="stats" style="font-size: 18px" align="center">
           <div>
-            W/L ratio: {{wlRatio}}
+            {{'W/L' | translate}} {{'ratio' | translate}}: {{wlRatio}}
             <table class="ratio" align="center">
               <tr>
-                <td>Wins</td>
-                <td>Loses</td>
+                <td>{{'Wins' | translate}}</td>
+                <td>{{'Loses' | translate}}</td>
               </tr>
               <tr>
                 <td style="color: green">{{wins}}</td>
@@ -135,11 +138,11 @@
             </table>
           </div>
           <div>
-            K/D ratio: {{kdRatio}}
+            {{'K/D' | translate}} {{'ratio' | translate}}: {{kdRatio}}
             <table class="ratio" align="center">
               <tr>
-                <td>Kills</td>
-                <td>Deaths</td>
+                <td>{{'Kills' | translate}}</td>
+                <td>{{'Deaths' | translate}}</td>
               </tr>
               <tr>
                 <td style="color: green">{{kills}}</td>
