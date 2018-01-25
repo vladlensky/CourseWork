@@ -1,3 +1,27 @@
-<p>
-  upgrades works!
-</p>
+<div class="columns">
+  <div class="halfStats">
+    <i style="padding:2%;color: white;font-size: 23px;">{{'Weapon' | translate}} : {{weaponName}}</i>
+    <img src="assets/aek971.png" style="width: 70%"/>
+    <div align="center" style="font-size: 20px;color:white">{{'rpm' | translate}} : {{weapon.rpm}}<br>
+      {{'range' | translate}} : {{weapon.range}}<br>
+      {{'ammunition' | translate}} : {{weapon.category}}<br>
+      {{'type' | translate}} : {{weapon.type}}
+    </div>
+  </div>
+  <div id="table">
+    <table>
+      <caption>{{'Upgrades' | translate}}</caption>
+      <tr>
+        <th>{{'name' | translate}}</th>
+        <th>{{'type' | translate}}</th>
+        <th>{{'kills for unlock' | translate}}</th>
+      </tr>
+      <tr *ngFor="let upgrade of upgrades">
+        <td>{{upgrade.name}}</td>
+        <td>{{upgrade.type}}</td>
+        <td>{{upgrade.killsForUnlock}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<button (click)="returnToMyStats()">{{'Return to stats' | translate}}</button>

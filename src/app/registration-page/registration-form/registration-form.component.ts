@@ -3,6 +3,7 @@ import {Person} from '../../classes';
 import {MainService} from '../../main.service';
 import {TranslateService} from '@ngx-translate/core';
 import {CookieService} from 'ngx-cookie-service';
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
@@ -12,7 +13,7 @@ export class RegistrationFormComponent implements OnInit {
   person = new Person();
   error_message;
   confirm;
-  constructor(private service: MainService, private translate: TranslateService, private cookieService: CookieService) {}
+  constructor(private router: Router, private service: MainService, private translate: TranslateService, private cookieService: CookieService) {}
 
   ngOnInit() {
     this.person.Nickname = '';
@@ -24,6 +25,7 @@ export class RegistrationFormComponent implements OnInit {
         if (value === 'PersonWasSuccessfullyRegistered') {
           this.cookieService.set('Nickname', this.person.Nickname);
           this.error_message = '';
+          this.router.navigate(['/stats']);
         } else {
           this.error_message = value;
         }

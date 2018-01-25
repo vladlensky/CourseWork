@@ -1,3 +1,16 @@
-<p>
-  gadgets works!
-</p>
+<div id="table">
+  <table>
+    <caption>{{'Gadgets' | translate}}</caption>
+    <tr>
+      <th>{{'name' | translate}}</th>
+      <th>{{'class' | translate}}</th>
+      <th>{{'all p./ nec. p.' | translate}}</th>
+    </tr>
+    <tr *ngFor="let gadget of gadgets">
+      <td>{{gadget.name}}</td>
+      <td>{{gadget.clazz}}</td>
+      <td><i style="color : green">{{getPoints(gadget.clazz)}}</i> /<i style="color : red">{{gadget.necessaryPoint}}</i></td>
+    </tr>
+  </table>
+</div>
+<button (click)="returnToMyStats()">{{'Return to stats' | translate}}</button>

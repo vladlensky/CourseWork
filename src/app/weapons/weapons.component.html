@@ -2,50 +2,23 @@
   <table>
     <caption>{{'Weapons' | translate}}</caption>
     <tr>
-      <th>ячейка</th>
-      <th>ячейка</th>
-      <th>ячейка</th>
-      <th>ячейка</th>
-      <th>ячейка</th>
-      <th>ячейка</th>
-      <th>ячейка</th>
+      <th>{{'name' | translate}}</th>
+      <th>{{'rpm' | translate}}</th>
+      <th>{{'range' | translate}}</th>
+      <th>{{'ammunition' | translate}}</th>
+      <th>{{'category' | translate}}</th>
+      <th>{{'type' | translate}}</th>
+      <th>{{'kills' | translate}}</th>
     </tr>
-    <tr>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-    </tr>
-    <tr>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-    </tr>
-    <tr>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-    </tr>
-    <tr>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
-      <td>ячейка</td>
+    <tr *ngFor="let weapon of weapons">
+      <td><a href='/weaponInfo/{{weapon.name}}'>{{weapon.name}}</a></td>
+      <td>{{weapon.rpm}}</td>
+      <td>{{weapon.range}}</td>
+      <td>{{weapon.ammunition}}</td>
+      <td>{{weapon.category}}</td>
+      <td>{{weapon.type}}</td>
+      <td>{{weapon.kills}}</td>
     </tr>
   </table>
 </div>
-<button>{{'Return to stats' | translate}}</button>
+<button (click)="returnToMyStats()">{{'Return to stats' | translate}}</button>

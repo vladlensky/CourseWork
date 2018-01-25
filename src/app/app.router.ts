@@ -9,10 +9,12 @@ import {MainService} from './main.service';
 import {TopComponent} from './top/top.component';
 import {MainPageComponent} from './main-page/main-page.component';
 import {WeaponsComponent} from "./weapons/weapons.component";
+import {GadgetsComponent} from './gadgets/gadgets.component';
+import {SpecializationsComponent} from './specializations/specializations.component';
+import {UpgradesComponent} from './upgrades/upgrades.component';
 
 export const router: Routes = [
   {path: '', redirectTo: 'battlefield', pathMatch: 'full'},
-  // {path: 'timeTO/:Nickname', canActivate: [AuthGuard], component: NetworkComponent},
   {path: 'battlefield', canActivate: [AuthGuard], component: RegistrationFormComponent},
   {path: 'registration', component: RegistrationFormComponent},
   {path: 'signIn', component: SignInFormComponent},
@@ -20,10 +22,12 @@ export const router: Routes = [
   {path: 'stats/:Nickname', canActivate: [AuthGuard], component: MainPageComponent},
   {path: 'stats', canActivate: [AuthGuard], component: MainPageComponent},
   {path: 'weapons', canActivate: [AuthGuard], component: WeaponsComponent},
-  // {path: 'friends/:Nickname', canActivate: [AuthGuard], component: NetworkComponent},
-  // {path: 'messages', canActivate: [AuthGuard], component: NetworkComponent},
-  // {path: 'messages/:Nickname', canActivate: [AuthGuard], component: NetworkComponent},
-  // {path: 'news', canActivate: [AuthGuard], component: NetworkComponent},
+  {path: 'gadgets', canActivate: [AuthGuard], component: GadgetsComponent},
+  {path: 'gadgets/:Nickname', canActivate: [AuthGuard], component: GadgetsComponent},
+  {path: 'weapons/:Nickname', canActivate: [AuthGuard], component: WeaponsComponent},
+  {path: 'specializations', canActivate: [AuthGuard], component: SpecializationsComponent},
+  {path: 'specializations/:Nickname', canActivate: [AuthGuard], component: SpecializationsComponent},
+  {path: 'weaponInfo/:name', canActivate: [AuthGuard], component: UpgradesComponent},
   ];
 
 

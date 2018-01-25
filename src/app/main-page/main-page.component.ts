@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MainService} from '../main.service';
 import {Info} from '../classes';
 import {isUndefined} from 'util';
@@ -14,14 +14,17 @@ import {CookieService} from 'ngx-cookie-service';
 })
 export class MainPageComponent implements OnInit {
   person =  new Info;
+  visibleExit = 'inline-block';
+  visibleReturn = 'inline-block';
   @ViewChild('search') searchField: ElementRef;
+  @ViewChild('check') check: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('med') med: ElementRef;
   @ViewChild('assault') assault: ElementRef;
   @ViewChild('sniper') sniper: ElementRef;
   @ViewChild('eng') eng: ElementRef;
-  @ViewChild('exit') exit: ElementRef;
-  @ViewChild('returnBack') returnBack: ElementRef;
+  weaponName = '';
+  weaponKills = 0;
   users;
   tempUsers;
   beginNumber = 4123;
@@ -40,32 +43,44 @@ export class MainPageComponent implements OnInit {
   kills = 4658;
   wlRatio = 0;
   kdRatio = 0;
-  constructor(private cookieService: CookieService, private service: MainService, private translate: TranslateService, private route: ActivatedRoute) {
+  constructor(private router: Router, private cookieService: CookieService, private service: MainService, private translate: TranslateService, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
-      if (cookieService.get('AllUsers') !== '') {
-        this.users = cookieService.get('AllUsers');
-      } else {
-        this.service.getAllUsersNames().subscribe(value => {
-            this.users = value;
-            this.tempUsers = this.users;
-          },
-          error => {
-          });
-        cookieService.set('AllUsers', this.users);
-      }
+      console.log(this.cookieService.get('Nickname'));
+      this.service.getAllUsersNames().subscribe(value => {
+          this.users = value;
+          this.tempUsers = this.users;
+        },
+        error => {
+        });
       if (!isUndefined(params['Nickname'])) {
         this.service.getPerson(params['Nickname']).subscribe(value => {
             this.person = value;
             this.fill();
             this.draw();
+            this.getWeapon();
+            if (this.person.nickName === this.service.getAuthPerson()) {
+              this.visibleReturn = 'none';
+              console.log(this.person.privacy);
+              if (this.person.privacy) {
+                this.check.nativeElement.checked = true;
+              }
+            } else {
+              this.visibleExit = 'none';
+            }
           },
           error => {
           });
       } else {
         this.service.getPerson(this.service.getAuthPerson()).subscribe(value => {
             this.person = value;
+            this.getWeapon();
             this.fill();
             this.draw();
+            this.visibleReturn = 'none';
+            console.log(this.person.privacy);
+            if (this.person.privacy) {
+              this.check.nativeElement.checked = true;
+            }
           },
           error => {
           });
@@ -74,9 +89,32 @@ export class MainPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.person.nickName === this.service.getAuthPerson()) {
-      this.returnBack.nativeElement.remove();
-    } else { this.exit.nativeElement.remove(); }
+  }
+
+  getPrivacy(name) {
+    this.service.getPerson(name).subscribe(value => {
+      return value.privacy;
+    });
+  }
+  toggle() {
+    this.service.togglePrivacy(this.person.nickName).subscribe(value => {});
+  }
+  exit() {
+    this.cookieService.deleteAll();
+    this.router.navigate(['/signIn']);
+  }
+
+  returnToMyStats() {
+    this.router.navigate(['/stats']);
+  }
+
+  getWeapon() {
+    this.service.getTopWeapon(this.person.nickName).subscribe(value => {
+        this.weaponKills = value.topWeaponKills;
+        this.weaponName = value.topWeaponName;
+      },
+      error => {
+      });
   }
   fill() {
     this.wins = this.person.wins;

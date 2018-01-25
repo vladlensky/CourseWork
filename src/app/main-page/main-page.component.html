@@ -7,24 +7,24 @@
     <div id="table">
       <table class="table">
         <tr *ngFor="let user of tempUsers">
-          <td class="td">{{user}}</td>
+          <td class="td"><a [ngStyle]="{'disabled' : getPrivacy(user)}" href='/stats/{{user}}'>{{user}}</a></td>
         </tr>
       </table>
     </div>
   </div>
   <div class="info">
     <i style="font-size: 30px;">{{person.nickName}}
-      <input style="margin-left: 5%" type="checkbox" id="privacy">
-      <label style="font-size: 20px;" for="privacy">{{'Private' | translate}}</label>
-      <button #returnBack style="width: 15%;margin-left: 5%">{{'Return to stats' | translate}}</button>
-      <button #exit style="width: 15%;margin-left: 5%">{{'exit' | translate}}</button>
+      <input #check (click)="toggle()" [ngStyle]="{'display' : visibleExit}" style="margin-left: 5%" type="checkbox" id="privacy">
+      <label [ngStyle]="{'display' : visibleExit}" style="font-size: 20px;" for="privacy">{{'Private' | translate}}</label>
+      <button [ngStyle]="{'display' : visibleReturn}" (click)="returnToMyStats()" style="width: 15%;margin-left: 5%">{{'Return to stats' | translate}}</button>
+      <button [ngStyle]="{'display' : visibleExit}" (click)="exit()" style="width: 15%;margin-left: 5%">{{'exit' | translate}}</button>
     </i>
     <hr>
     <div class="buttons">
-      <button >{{'Top' | translate}}</button>
-      <button >{{'Weapons' | translate}}</button>
-      <button >{{'Gadgets' | translate}}</button>
-      <button >{{'Specializations' | translate}}</button>
+      <button (click)="router.navigate(['/top']);">{{'Top' | translate}}</button>
+      <button (click)="router.navigate(['/weapons/' + person.nickName]);">{{'Weapons' | translate}}</button>
+      <button (click)="router.navigate(['/gadgets/' + person.nickName]);">{{'Gadgets' | translate}}</button>
+      <button (click)="router.navigate(['/specializations/'  + person.nickName]);">{{'Specializations' | translate}}</button>
     </div>
     <div class="stats">
       <div class="halfStats">
@@ -58,7 +58,7 @@
         </table>
       </div>
       <div class="halfStats">
-        <i style="font-size: 23px;">{{'Top weapon' | translate}} : AEK - 971, Kills: 687</i>
+        <i style="font-size: 23px;">{{'Top weapon' | translate}} : {{weaponName}}, Kills: {{weaponKills}}</i>
         <img src="assets/aek971.png" style="width: 90%"/>
         <hr color="#3b3b3b">
         <div class="stats" style="font-size: 18px" align="center">

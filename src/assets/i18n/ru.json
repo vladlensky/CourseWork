@@ -22,5 +22,11 @@
   "Top weapon":"Лучшее оружие",
   "search":"поиск",
   "Return to stats":"Вернуться",
-  "exit":"выход"
+  "exit":"выход",
+  "name": "Название",
+  "rpm": "овм",
+  "range": "Радиус",
+  "ammunition": "Аммуниция",
+  "category": "Категория",
+  "type": "Тип"
 }

@@ -3,6 +3,7 @@ import {Person} from '../../classes';
 import {MainService} from '../../main.service';
 import {TranslateService} from '@ngx-translate/core';
 import {CookieService} from 'ngx-cookie-service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sign-in-form',
@@ -13,11 +14,12 @@ export class SignInFormComponent {
   error_message = '';
   person = new Person();
 
-  constructor(private service: MainService, private translate: TranslateService, private cookieService: CookieService) { }
+  constructor(private router: Router, private service: MainService, private translate: TranslateService, private cookieService: CookieService) { }
   checkPerson () {
     this.service.postLogin(this.person.Nickname, this.person.password).subscribe(value => {
         if (value === 'AllIsCorrect') {
           this.cookieService.set('Nickname', this.person.Nickname);
+          this.router.navigate(['/stats']);
         } else {
           this.error_message = value;
         }

@@ -22,5 +22,11 @@
   "Top weapon":"Top weapon",
   "search":"search",
   "Return to stats":"Return to stats",
-  "exit":"exit"
+  "exit":"exit",
+  "name":     "name",
+  "rpm":      "rpm",
+  "range":    "range",
+  "ammunition":"ammunition",
+  "category": "category",
+  "type":     "type"
 }

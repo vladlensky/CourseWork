@@ -1,14 +1,13 @@
 table {
-  margin-left: 8px;
-  width: 300px;
+  min-width: 100%;
   font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
   font-size: 16px;
   text-align: left;
   border-collapse: collapse;
-  box-shadow: 0 0 0 8px #3b3b3b;
   color:white;
 }
 th, td {
+  font-size: 14px;
   border-top: 5px solid #3b3b3b;
   padding: 8px;
   background: #94908b;
@@ -36,18 +35,20 @@ button {
 button:hover { background: rgba(130,130,130,.8); }
 button:active { background: rgba(130,130,130,1); }
 caption {
-  color: black;
-  font-size: large;
+  color: white;
+  font-size: 30px;
   font-weight: bold;
   text-align: right;
   padding-bottom: 2%;
 }
 
 #table {
+  background: #94908b;
+  box-shadow: 0 0 0 8px #3b3b3b;
   margin-left:auto;
   margin-right:auto;
   margin-top:100px;
-  width: 38%;
+  width: 54%;
   max-height: 400px;
   overflow: auto;
   -ms-overflow-style: none;

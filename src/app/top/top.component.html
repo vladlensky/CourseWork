@@ -1,35 +1,8 @@
 <div id="table">
   <table>
-    <tr>
-      <td>ячейка</td>
-    </tr>
-    <tr>
-      <td>ячейка</td>
-    </tr>
-    <tr>
-      <td>ячейка</td>
-    </tr>
-    <tr>
-      <td>ячейка</td>
-    </tr>
-    <tr>
-      <td>ячейка</td>
-    </tr>
-    <tr>
-      <td>ячейка</td>
-    </tr>
-    <tr>
-      <td>ячейка</td>
-    </tr>
-    <tr>
-      <td>ячейка</td>
-    </tr>
-    <tr>
-      <td>ячейка</td>
-    </tr>
-    <tr>
-      <td>ячейка</td>
+    <tr *ngFor="let user of users">
+      <td >{{user.name}} ||| kills: {{user.kills}}</td>
     </tr>
   </table>
 </div>
-<button>{{'Return to stats' | translate}}</button>
+<button (click)="returnToMyStats()">{{'Return to stats' | translate}}</button>

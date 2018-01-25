@@ -1,3 +1,14 @@
-<p>
-  specializations works!
-</p>
+<div id="table">
+  <table>
+    <caption>{{'Specializations' | translate}}</caption>
+    <tr>
+      <th>{{'name' | translate}}</th>
+      <th>{{'lvl/ necessary lvl' | translate}}</th>
+    </tr>
+    <tr *ngFor="let specialization of specializations">
+      <td>{{specialization.name}}</td>
+      <td><i style="color : green">{{person.lvl}}</i> /<i style="color : red">{{specialization.necessaryLvl}}</i></td>
+    </tr>
+  </table>
+</div>
+<button (click)="returnToMyStats()">{{'Return to stats' | translate}}</button>
