@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Person} from '../../classes';
 import {MainService} from '../../main.service';
 import {TranslateService} from '@ngx-translate/core';
+import {CookieService} from 'ngx-cookie-service';
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
@@ -10,15 +11,28 @@ import {TranslateService} from '@ngx-translate/core';
 export class RegistrationFormComponent implements OnInit {
   person = new Person();
   error_message;
-  constructor(private service: MainService, private translate: TranslateService) {}
+  confirm;
+  constructor(private service: MainService, private translate: TranslateService, private cookieService: CookieService) {}
 
   ngOnInit() {
     this.person.Nickname = '';
     this.person.password = '';
   }
   add_person() {
-    // event.preventDefault();
-    // this.error_message = this.service.add_person(this.person);
+    if (this.person.password === this.confirm) {
+    this.service.postRegistration(this.person.Nickname, this.person.password).subscribe(value => {
+        if (value === 'PersonWasSuccessfullyRegistered') {
+          this.cookieService.set('Nickname', this.person.Nickname);
+          this.error_message = '';
+        } else {
+          this.error_message = value;
+        }
+      },
+      error => {
+      });
+    } else {
+      this.error_message = 'wrong second password';
+    }
   }
 }
 

@@ -17,6 +17,7 @@ export const router: Routes = [
   {path: 'registration', component: RegistrationFormComponent},
   {path: 'signIn', component: SignInFormComponent},
   {path: 'top', canActivate: [AuthGuard], component: TopComponent},
+  {path: 'stats/:Nickname', canActivate: [AuthGuard], component: MainPageComponent},
   {path: 'stats', canActivate: [AuthGuard], component: MainPageComponent},
   {path: 'weapons', canActivate: [AuthGuard], component: WeaponsComponent},
   // {path: 'friends/:Nickname', canActivate: [AuthGuard], component: NetworkComponent},

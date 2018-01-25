@@ -1,5 +1,11 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
+import {ActivatedRoute} from '@angular/router';
+import {MainService} from '../main.service';
+import {Info} from '../classes';
+import {isUndefined} from 'util';
+import {forEach} from '@angular/router/src/utils/collection';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-main-page',
@@ -7,11 +13,17 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent implements OnInit {
+  person =  new Info;
+  @ViewChild('search') searchField: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('med') med: ElementRef;
   @ViewChild('assault') assault: ElementRef;
   @ViewChild('sniper') sniper: ElementRef;
   @ViewChild('eng') eng: ElementRef;
+  @ViewChild('exit') exit: ElementRef;
+  @ViewChild('returnBack') returnBack: ElementRef;
+  users;
+  tempUsers;
   beginNumber = 4123;
   endNumber = 12567;
   medPoints = 5434;
@@ -23,14 +35,64 @@ export class MainPageComponent implements OnInit {
   maxAP = 100000;
   maxSP = 70000;
   wins = 738;
-  loses = 1052;
+  losses = 1052;
   deaths = 3589;
   kills = 4658;
-  wlRatio = Math.round(this.wins / this.loses * 100) / 100;
-  kdRatio = Math.round(this.kills / this.deaths * 100) / 100;
-  constructor(private translate: TranslateService) { }
+  wlRatio = 0;
+  kdRatio = 0;
+  constructor(private cookieService: CookieService, private service: MainService, private translate: TranslateService, private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      if (cookieService.get('AllUsers') !== '') {
+        this.users = cookieService.get('AllUsers');
+      } else {
+        this.service.getAllUsersNames().subscribe(value => {
+            this.users = value;
+            this.tempUsers = this.users;
+          },
+          error => {
+          });
+        cookieService.set('AllUsers', this.users);
+      }
+      if (!isUndefined(params['Nickname'])) {
+        this.service.getPerson(params['Nickname']).subscribe(value => {
+            this.person = value;
+            this.fill();
+            this.draw();
+          },
+          error => {
+          });
+      } else {
+        this.service.getPerson(this.service.getAuthPerson()).subscribe(value => {
+            this.person = value;
+            this.fill();
+            this.draw();
+          },
+          error => {
+          });
+      }
+    });
+  }
 
   ngOnInit() {
+    if (this.person.nickName === this.service.getAuthPerson()) {
+      this.returnBack.nativeElement.remove();
+    } else { this.exit.nativeElement.remove(); }
+  }
+  fill() {
+    this.wins = this.person.wins;
+    this.deaths = this.person.deaths;
+    this.losses = this.person.losses;
+    this.kills = this.person.kills;
+    this.wlRatio = Math.round(this.wins / this.losses * 100) / 100;
+    this.kdRatio = Math.round(this.kills / this.deaths * 100) / 100;
+    this.beginNumber = this.person.totalScore - this.person.scoreForThisLvl;
+    this.endNumber = this.person.scoreForNextLvl - this.person.scoreForThisLvl;
+    this.medPoints = this.person.supportPoints;
+    this.engPoints = this.person.engineerPoints;
+    this.assaultPoints = this.person.assaultPoints;
+    this.sniperPoints = this.person.reconPoints;
+  }
+  draw() {
     let context = this.canvas.nativeElement.getContext('2d');
     const centerX = this.canvas.nativeElement.width / 2;
     const centerY = this.canvas.nativeElement.height / 2;
@@ -83,5 +145,18 @@ export class MainPageComponent implements OnInit {
     context.lineTo(this.engPoints / this.maxEP * this.eng.nativeElement.width, 50);
     context.stroke();
   }
-
+  searchUsers() {
+    const searchValue = this.searchField.nativeElement.value;
+    this.tempUsers = [];
+    if (searchValue === '') {
+      this.tempUsers = this.users;
+    }
+    const temp = [];
+    this.users.forEach(function(item, i) {
+      if (item.search(searchValue) !== -1) {
+        temp[temp.length] = item;
+      }
+    });
+    this.tempUsers = temp;
+  }
 }

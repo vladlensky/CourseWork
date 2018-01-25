@@ -1,5 +1,5 @@
 <router-outlet></router-outlet>
-<form class="form-container" (submit)="checkPerson()">
+<form class="form-container">
   <div class="form-title"><h2>{{'SignIn' | translate}}</h2></div>
   <div class="form-title">{{'Nickname' | translate}}</div>
   <input [(ngModel)]="person.Nickname" minlength="3" pattern='' required class="form-field" type="text" name="Nickname" /><br />
@@ -8,7 +8,7 @@
   <div style="color:red;">{{error_message}}</div>
   <div class="submit-container">
     <a href="/registration" class="submit-button" style="margin-right: 10%">{{'SignUp' | translate}}</a>
-    <button class="submit-button" type="submit">{{'Submit' | translate}}</button>
+    <button (click)="checkPerson()" class="submit-button" type="submit">{{'Submit' | translate}}</button>
   </div>
 </form>
 

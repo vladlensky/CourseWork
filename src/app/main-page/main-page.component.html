@@ -1,85 +1,23 @@
 <div class="main">
   <div class="users" style="width: 95%">
-    <form action="" method="post" class="search">
-      <input type="search" name="" placeholder="{{'search' | translate}}" class="input" />
+    <form action="" class="search">
+      <input #search (change)="searchUsers()" type="search" name="" placeholder="{{'search' | translate}}" class="input" />
       <input type="submit" name="" value="" class="submit" />
     </form>
     <div id="table">
       <table class="table">
-        <tr>
-          <td class="td" style="border-top:none;">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td">ячейка</td>
-        </tr>
-        <tr>
-          <td class="td" >ячейка</td>
+        <tr *ngFor="let user of tempUsers">
+          <td class="td">{{user}}</td>
         </tr>
       </table>
     </div>
   </div>
   <div class="info">
-    <i style="font-size: 30px;">Dorou
+    <i style="font-size: 30px;">{{person.nickName}}
       <input style="margin-left: 5%" type="checkbox" id="privacy">
       <label style="font-size: 20px;" for="privacy">{{'Private' | translate}}</label>
-      <button style="width: 15%;margin-left: 5%">{{'Return to stats' | translate}}</button>
+      <button #returnBack style="width: 15%;margin-left: 5%">{{'Return to stats' | translate}}</button>
+      <button #exit style="width: 15%;margin-left: 5%">{{'exit' | translate}}</button>
     </i>
     <hr>
     <div class="buttons">
@@ -129,11 +67,11 @@
             <table class="ratio" align="center">
               <tr>
                 <td>{{'Wins' | translate}}</td>
-                <td>{{'Loses' | translate}}</td>
+                <td>{{'Losses' | translate}}</td>
               </tr>
               <tr>
                 <td style="color: green">{{wins}}</td>
-                <td style="color: red">{{loses}}</td>
+                <td style="color: red">{{losses}}</td>
               </tr>
             </table>
           </div>

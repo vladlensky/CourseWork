@@ -1,15 +1,15 @@
 <router-outlet></router-outlet>
-<form class="form-container" (submit)="add_person()">
+<form class="form-container">
   <div class="form-title"><h2>{{'SignUp' | translate}}</h2></div>
   <div class="form-title">{{'Nickname' | translate}}</div>
   <input class="form-field" maxlength="10" [(ngModel)]="person.Nickname" required  type="text" name="nick" /><br />
   <div class="form-title">{{'Password' | translate}}</div>
   <input class="form-field" minlength="6" pattern="^[a-zA-Z0-9]+$" [(ngModel)]="person.password" required type="password" name="password" /><br />
   <div class="form-title">{{'Confirm password' | translate}}</div>
-  <input class="form-field" minlength="6" pattern="^[a-zA-Z0-9]+$" [(ngModel)]="person.password" required type="password" name="password" /><br />
+  <input class="form-field" minlength="6" pattern="^[a-zA-Z0-9]+$" [(ngModel)]="confirm" required type="password" name="password" /><br />
   <div style="color:red;">{{error_message}}</div>
   <div class="submit-container">
     <a href="/signIn" class="submit-button" style="margin-right: 125px">{{'SignIn' | translate}}</a>
-    <button class="submit-button" type="submit">{{'Submit' | translate}}</button>
+    <button class="submit-button" type="submit" (click)="add_person()">{{'Submit' | translate}}</button>
   </div>
 </form>
